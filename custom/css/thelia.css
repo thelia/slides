@@ -4,3 +4,14 @@ body {
     background-color: #FFFFFF;
     background-position: right bottom;
 }
+
+.reveal h1 {
+    color: #ef8b35;
+    text-shadow: none;
+}
+
+.reveal section img {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
