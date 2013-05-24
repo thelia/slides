@@ -53,9 +53,9 @@
                         <h2>Syntaxe</h2>
                     </section>
                     <section>
-                        <h2>Boucles</h2>
+                        <h2>Boucle</h2>
                         <pre>
-                            <code data-trim>
+                            <code data-trim class="html">
 <THELIA_prod type="PRODUIT" ref="ref_prod">
     <p class="bloc_description">
         #DESCRIPTION
@@ -65,12 +65,44 @@
                             </code>
                         </pre>
                     </section>
-
+                    <section>
+                        <h2>Filtre</h2>
+                        <pre>
+                            <code>
+#FILTRE_egalite(variable à tester||valeur||affichage si égale)
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>Boucle test</h2>
+                        <pre>
+                            <code data-trim>
+<TEST_nom_boucle variable="var_ou_val" test="type test" valeur="var_ou_val">
+    afficher si la condition est vérifiée
+</TEST_nom_boucle>
+    afficher si la condition n'est pas vérifiée
+<\//TEST_nom_boucle>
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>Boucle Répéter</h2>
+                        <pre>
+                            <code data-trim>
+<REPETER_nom_boucle debut="nombre" fin="nombre" increment="nombre">
+    texte à répéter
+</REPETER_nom_boucle>
+                            </code>
+                        </pre>
+                    </section>
                 </section>
-
-
-
-
+                <section>
+                    <section>
+                        <h1>Thelia V2</h1>
+                        <img src="custom/images/thelia_v2.png">
+                    </section>
+                        
+                </section>
             </div>
 
 		</div>
