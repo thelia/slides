@@ -177,9 +177,9 @@
                             <code data-trim>
 {ifloop rel="loop_id"}
     Display if loop return at least 1 result
-{loop id="loop_id" type="product" arg1="value1" arg2="value2"}
-    price : #PRICE
-{endloop}
+    {loop id="loop_id" type="product" arg1="value1" arg2="value2"}
+        price : #PRICE
+    {endloop}
     Display if loop return at least 1 result
 {elseloop}
     Display if loop return nothing
@@ -221,13 +221,36 @@ MyModule
     Config
         config.xml
     Loop
-        MySuperLoop.php
-        MyHugeLoop.php
+        Product.php
+        MyLoop.php
     Actions
         Customer.php
         Cart.php
     Model
         ...
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>Config.xml</h2>
+                        <pre>
+                            <code data-trim>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns="http://thelia.net/schema/dic/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd"
+>
+    <loops>
+        <loop name="MyModule_Product" class="MyModule\Loop\Product" />
+        <loop name="MyModule_MyLoop" class="MyModule\Loop\MyLoop" />
+    </loops>
+    <services>
+        <service id="myplugin.action.customer" class="MyModule\Actions\Customer">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</config>
                             </code>
                         </pre>
                     </section>
