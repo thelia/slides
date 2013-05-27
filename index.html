@@ -162,13 +162,13 @@
                         <pre>
                             <code data-trim>
 {ifloop rel="loop_id"}
-    Affichage du bloc si la boucle retourne au moins 1 résultat
+    Display if loop return at least 1 result
 {loop id="loop_id" type="product" arg1="value1" arg2="value2"}
     price : #PRICE
 {endloop}
-    Affichage du bloc si la boucle retourne au moins 1 résultat
+    Display if loop return at least 1 result
 {elseloop}
-    Affichage du bloc si la boucle ne retourne aucun résultat
+    Display if loop return nothing
 {endifloop}
                             </code>
                         </pre>
@@ -176,8 +176,20 @@
                     <section>
                         <h2>Boucle test</h2>
                         <pre>
-                            <code>
-                                
+                            <code data-trim>
+{if var==value && var2==value2}
+    display if true
+{else}
+    display if false
+{endif}
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>Filtre</h2>
+                        <pre>
+                            <code data-trim>
+{#VAR|strtoupper|truncate(5)}
                             </code>
                         </pre>
                     </section>
