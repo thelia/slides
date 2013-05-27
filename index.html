@@ -37,45 +37,45 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-			
+
 			 <section>
-                <section>                    
+                <section>
                     <img src="custom/images/thelia-ppt.png">
                 </section>
               </section>
-              
+
               <section>
-                 <section>                    
+                 <section>
                         <h2>THELIA <br /> <span class="baseline"> Solution e-commerce 100% libre </span> </h2>
                         <div class="separator"></div>
                         <p> Créée en 2005 </p>
-                        <p class="fragment"> Publiée sous licence GPL en 2006</p>                    
-                        <p class="fragment"> Pensée pour les webdesigners</p>  
+                        <p class="fragment"> Publiée sous licence GPL en 2006</p>
+                        <p class="fragment"> Pensée pour les webdesigners</p>
                  </section>
-                 
-                 <section>                    
+
+                 <section>
                         <h2>THELIA <br /> <span class="baseline"> Editée par OpenStudio </span></h2>
                          <div class="separator"></div>
                         <p> Société de Services en Logiciels Libres </p>
                         <p class="fragment">Septembre 2012 : fusion Octolys / OpenStudio</p>
-                        <p class="fragment"> 26 collaborateurs </p>                      
+                        <p class="fragment"> 26 collaborateurs </p>
                  </section>
-                 
-                  <section>                    
-                        <img src="custom/images/clients.png">              
+
+                  <section>
+                        <img src="custom/images/clients.png">
                   </section>
-                  
-                   <section>                    
+
+                   <section>
                         <h2>THELIA <br /> <span class="baseline"> Nos projets pour 2013 </span></h2>
                          <div class="separator"></div>
                         <p> Espace contributeurs</p>
                         <p class="fragment">TheliaTour</p>
-                        <p class="fragment">Salon e-commerce</p>                      
+                        <p class="fragment">Salon e-commerce</p>
                  </section>
-                 
-                 
+
+
               </section>
-                  
+
 
 
                 <section>
@@ -84,10 +84,14 @@
                         <img src="custom/images/pres_bo.png">
                     </section>
                     <section>
-                        <p>Version 1.5 Long Term Support</p>
-                        <p class="fragment">Sourceforge.net</p>
-                        <p class="fragment">Documentation complète</p>
-                        <p class="fragment">Communauté active</p>
+                        <ul>
+                            <li>Version 1.5 Long Term Support</li>
+                            <li class="fragment">Sourceforge.net</li>
+                            <li class="fragment">Documentation complète</li>
+                            <li class="fragment">Communauté active</li>
+                            <li class="fragment">+7 000 boutiques</li>
+                            <li class="fragment">+650 Plugins</li>
+                        </ul>
                     </section>
                     <section>
                         <h2>Syntaxe</h2>
@@ -216,13 +220,13 @@
                         <pre>
                             <code data-trim>
 {ifloop rel="loop_id"}
-    Display if loop return at least 1 result
+    <p>Display if loop return at least 1 result</p>
     {loop id="loop_id" type="product" arg1="value1" arg2="value2"}
         price : #PRICE
     {endloop}
-    Display if loop return at least 1 result
+    <p>Display if loop return at least 1 result</p>
 {elseloop}
-    Display if loop return nothing
+    <p>Display if loop return nothing</p>
 {endifloop}
                             </code>
                         </pre>
@@ -232,9 +236,9 @@
                         <pre>
                             <code data-trim>
 {if var==value && var2==value2}
-    display if true
+    <p>display if true</p>
 {else}
-    display if false
+    <p>display if false</p>
 {endif}
                             </code>
                         </pre>
@@ -243,7 +247,7 @@
                         <h2>Filtre</h2>
                         <pre>
                             <code data-trim>
-{#VAR|strtoupper|truncate(5)}
+{#VAR|strtoupper}
                             </code>
                         </pre>
                     </section>
@@ -293,6 +297,109 @@ MyModule
 </config>
                             </code>
                         </pre>
+                    </section>
+                    <section>
+                        <h2>Boucle MyModule_Product</h2>
+                        <pre>
+                            <code class="php" data-trim>
+
+<?php
+namespace MyModule\Loop;
+
+use Thelia\Tpex\Element\Loop\BaseLoop;
+use Thelia\Tpex\Element\Loop\LoopResult;
+use Thelia\Tpex\Element\Loop\LoopResultRow;
+
+class Product extends BaseLoop
+{
+    public function defineArgs()
+    {
+
+    }
+
+    public function exec()
+    {
+
+    }
+}
+?>
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>defineArgs</h2>
+                        <pre>
+                            <code class="php" data-trim>
+/**
+* @return array defining all loop arguments
+*/
+public function defineArgs()
+{
+    return array(
+        "ref",
+        "id" => "optional",
+        "stock" => array(
+            "optional",
+            "default" => 1
+        )
+    );
+}
+                            </code>
+                        </pre>
+                        <p>Toutes les arguments sont accessibles comme des propriétés publics de la classe</p>
+                    </section>
+                    <section>
+                        <h2>exec</h2>
+                        <pre>
+                            <code class="php" data-trim>
+/**
+* @return \Thelia\Tpex\Element\Loop\LoopResult
+*/
+public function exec()
+{
+    $result = new LoopResult();
+    if($this->stock < 0) $this->stock = ($this->stock * -1);
+    $this->stock += 10;
+    for ($i=0; $i < $this->stock; $i++) {
+        $loopResultRow = new LoopResultRow();
+        $loopResultRow->set('modulo', $i%2);
+        $result->addRow($loopResultRow);
+    }
+    return $result;
+}
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>Récapitulons</h2>
+                        <ul>
+                            <li>Nombre inifini de boucles par module</li>
+                            <li>Une API claire permettant d'implémenter facilement une nouvelle boucle</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>What else ?</h2>
+                        <p>La boucle product de Thelia ne me convient pas, je veux implémenter ma propre boucle product !</p>
+                    </section>
+                    <section>
+                        <h2>Let's do it !</h2>
+                        <pre>
+                            <code data-trim>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns="http://thelia.net/schema/dic/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd"
+>
+    <loops>
+        <loop name="product" class="MyModule\Loop\Product" ></loop>
+    </loops>
+</config>
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+
                     </section>
                 </section>
 
