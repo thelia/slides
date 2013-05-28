@@ -399,7 +399,56 @@ public function exec()
                         </pre>
                     </section>
                     <section>
+                        <h2>Actions</h2>
+                        <p>Même principe que thelia 1 mais une implémentation différente</p>
+                    </section>
+                    <section>
+                        <h2>config.xml</h2>
+                        <pre>
+                            <code class="xml" data-trim>
+<?xml version="1.0" encoding="UTF-8" ?>
 
+<config xmlns="http://thelia.net/schema/dic/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd"
+        >
+    <services>
+        <service id="myplugin.action.customer" class="MyModule\Actions\Customer">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</config>
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>classe action</h2>
+                        <pre>
+                            <code data-trim>
+<?php
+namespace MyModule\Actions;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Thelia\Core\Event\ActionEvent;
+
+class Customer implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return array(
+            "action.createCustomer" => "create"
+        )
+
+    }
+
+    public function create(ActionEvent $event)
+    {
+        //code here
+    }
+}
+?>
+                            </code>
+                        </pre>
                     </section>
                 </section>
 
