@@ -301,9 +301,7 @@ MyModule
                     <section>
                         <h2>Boucle MyModule_Product</h2>
                         <pre>
-                            <code class="php" data-trim>
-
-<?php
+                            <code class="php" data-trim data-noescape>
 namespace MyModule\Loop;
 
 use Thelia\Tpex\Element\Loop\BaseLoop;
@@ -322,14 +320,13 @@ class Product extends BaseLoop
 
     }
 }
-?>
                             </code>
                         </pre>
                     </section>
                     <section>
                         <h2>defineArgs</h2>
                         <pre>
-                            <code class="php" data-trim>
+                            <code class="php" data-trim data-noescape>
 /**
 * @return array defining all loop arguments
 */
@@ -351,7 +348,7 @@ public function defineArgs()
                     <section>
                         <h2>exec</h2>
                         <pre>
-                            <code class="php" data-trim>
+                            <code class="php" data-trim data-noescape>
 /**
 * @return \Thelia\Tpex\Element\Loop\LoopResult
 */
@@ -424,8 +421,7 @@ public function exec()
                     <section>
                         <h2>classe action</h2>
                         <pre>
-                            <code data-trim>
-<?php
+                            <code data-trim data-noescape>
 namespace MyModule\Actions;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -437,7 +433,7 @@ class Customer implements EventSubscriberInterface
     {
         return array(
             "action.createCustomer" => "create"
-        )
+        );
 
     }
 
@@ -446,7 +442,47 @@ class Customer implements EventSubscriberInterface
         //code here
     }
 }
-?>
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>Récapitulons</h2>
+                        <ul>
+                            <li>Nombre infini d'actions par module</li>
+                            <li>Gérer une priorité d'exécution</li>
+                            <li>Possibilité de stoper une action</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>What else ?</h2>
+                        <p>Je veux remplacer le traitement des actions par défaut avec les miennes !</p>
+                    </section>
+                    <section>
+                        <h2>Let's do it</h2>
+                        <pre>
+                            <code data-trim data-noescape>
+namespace MyModule\Actions;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Thelia\Core\Event\ActionEvent;
+
+class Customer implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return array(
+            "action.createCustomer" => "create"
+        );
+
+    }
+
+    public function create(ActionEvent $event)
+    {
+        //code here
+
+        $event->stopPropagation();
+    }
+}
                             </code>
                         </pre>
                     </section>
