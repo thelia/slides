@@ -92,7 +92,14 @@
                             <li class="fragment">Documentation complète</li>
                             <li class="fragment">Communauté active</li>
                             <li class="fragment">+7 000 boutiques</li>
-                            <li class="fragment">+300 Plugins</li>
+                            <li class="fragment">+300 Plugins
+                                <ul>
+                                    <li>paysite cash</li>
+                                    <li>Shoppingflux</li>
+                                    <li>SoColissimo</li>
+                                    <li>mailjet</li>
+                                </ul>
+                            </li>
                         </ul>
                     </section>
                     <section>
@@ -155,6 +162,15 @@
                             <li>De nouvelles fonctionnalités</li>
                             <li>Nouvelle documentation</li>
                             <li>Solution toujours plus modulaire</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Fonctionnalités</h2>
+                        <ul>
+                            <li>Moteur de taxes</li>
+                            <li>Combinaison de déclinaisons</li>
+                            <li>Gestion de code promo avancé</li>
+                            <li>Multi rubriquge</li>
                         </ul>
                     </section>
                 </section>
@@ -472,7 +488,7 @@ class Customer implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            "action.createCustomer" => array("create", 0) 
+            "action.createCustomer" => array("create", 0)
         );
 
     }
