@@ -451,7 +451,7 @@ class Customer implements EventSubscriberInterface
                         <ul>
                             <li>Nombre infini d'actions par module</li>
                             <li>Gérer une priorité d'exécution</li>
-                            <li>Possibilité de stoper une action</li>
+                            <li>Possibilité de stopper une action</li>
                         </ul>
                     </section>
                     <section>
@@ -472,7 +472,7 @@ class Customer implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            "action.createCustomer" => "create"
+            "action.createCustomer" => array("create", 0) 
         );
 
     }
