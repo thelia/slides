@@ -46,9 +46,9 @@ body {
 }
 
 .reveal section ul li {
- 	font-size: 0.7em;
+ 	font-size: 0.8em;
 	color: #575757; 
-	list-style-image: url('../images/puce.gif');
+	list-style-image: url('../images/puce.png');
 	font-family: 'Lato', Arial, serif;
    	font-weight: 400; 
 }
